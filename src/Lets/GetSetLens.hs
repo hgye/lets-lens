@@ -178,6 +178,7 @@ infixr 4 %~
   -> a
   -> a
 (.~) = flip . set
+  -- modify l (const b)
   -- error "todo: (.~)"
 
 infixl 5 .~
