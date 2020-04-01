@@ -125,8 +125,11 @@ modify ::
   -> (a -> b)
   -> s
   -> t
-modify (Lens r) f =
-  getIdentity . r  (Identity . f)
+modify l@(Lens r) f s =
+  let a = get l s
+  in
+    set l s (f a)
+  -- getIdentity . r  (Identity . f)
   -- getIdentity (r (Identity . f) a)
   -- error "todo: modify"
 
@@ -158,6 +161,9 @@ infixr 4 %~
   -> s
   -> t
 (.~) (Lens r) b s =
+  -- let a = get l s
+  -- in
+    -- set l s (f a)
   getIdentity (r (const (Identity b)) s)
   --error "todo: (.~)"
 
